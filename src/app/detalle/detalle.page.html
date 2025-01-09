@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar style="--background: #3880ff; --color: white;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/videoclub"></ion-back-button>
+    </ion-buttons>
+    <ion-title  *ngIf="movie">{{ movie.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card  *ngIf="movie">
+    <ion-img [src]="movie.poster"></ion-img> 
+    <ion-card-header>
+      <ion-card-title>{{ movie.title }}</ion-card-title>
+      <ion-card-subtitle><strong>Director:</strong>{{ movie.director }}</ion-card-subtitle>
+      <ion-card-subtitle><strong>Año:</strong>{{ movie.year }}</ion-card-subtitle>
+      <ion-card-subtitle><strong>Sipnosis: </strong> {{ movie.synopsis }}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

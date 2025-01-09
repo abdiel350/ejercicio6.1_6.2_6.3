@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar style="--background: #3880ff; --color: white;"> 
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>videoclub</ion-title> 
+
+    <ion-buttons slot="primary">
+      <ion-button *ngIf="modoLista" (click)="cambiarVista()">
+        <ion-icon slot="icon-only" name="apps-sharp"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!modoLista" (click)="cambiarVista()">
+        <ion-icon slot="icon-only" name="reorder-four-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="listaPeliculas && listaPeliculas.length > 0; else listaVacia">
+    <!-- Vista tipo lista -->
+    <ion-list *ngIf="modoLista; else modoGrid">
+      <ion-item *ngFor="let pelicula of listaPeliculas" (click)="verPaginaDetalle(pelicula.id)" detail>
+        
+        <ion-thumbnail slot="start"> 
+          <ion-img src={{pelicula.poster}}></ion-img>   
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ pelicula.title }}</h2>
+          <p>
+            <strong style="color: #666769;">Director:</strong> {{ pelicula.director }}
+          </p>
+          <p>
+            <strong style="color: #666769;">Año:</strong> {{pelicula.year }}
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- Vista tipo cuadrícula -->
+    <ng-template #modoGrid>
+      <ion-grid>
+        <ion-row>
+          <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" *ngFor="let pelicula of listaPeliculas; index as id">
+            <ion-card (click)="verPaginaDetalle(pelicula.id)">
+              <ion-card-header>
+                <ion-card-title>{{ pelicula.title }}</ion-card-title>
+              </ion-card-header>
+              <ion-img src={{pelicula.poster}}></ion-img>   
+              <ion-card-content>
+          <p>
+            <strong style="color: #666769;">Director:</strong> {{ pelicula.director }}
+          </p>
+          <p>
+            <strong style="color: #666769;">Año:</strong> {{pelicula.year }}
+          </p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+  </div>
+
+  <!-- Plantilla para lista vacía -->
+  <ng-template #listaVacia>
+    <div style="text-align: center; padding: 20px;">
+      <p>La Lista está Vacía</p>
+    </div>
+  </ng-template>
+</ion-content>
