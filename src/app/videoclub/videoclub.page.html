@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar style="--background: #3880ff; --color: white;"> 
+  <ion-toolbar style="--background: #3880ff; --color: white;">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>videoclub</ion-title> 
+    <ion-title>videoclub</ion-title>
 
     <ion-buttons slot="primary">
       <ion-button *ngIf="modoLista" (click)="cambiarVista()">
@@ -21,9 +21,8 @@
     <!-- Vista tipo lista -->
     <ion-list *ngIf="modoLista; else modoGrid">
       <ion-item *ngFor="let pelicula of listaPeliculas" (click)="verPaginaDetalle(pelicula.id)" detail>
-        
-        <ion-thumbnail slot="start"> 
-          <ion-img src={{pelicula.poster}}></ion-img>   
+        <ion-thumbnail slot="start">
+          <ion-img [src]="pelicula.poster"></ion-img>
         </ion-thumbnail>
         <ion-label>
           <h2>{{ pelicula.title }}</h2>
@@ -31,7 +30,7 @@
             <strong style="color: #666769;">Director:</strong> {{ pelicula.director }}
           </p>
           <p>
-            <strong style="color: #666769;">Año:</strong> {{pelicula.year }}
+            <strong style="color: #666769;">Año:</strong> {{ pelicula.year }}
           </p>
         </ion-label>
       </ion-item>
@@ -41,19 +40,21 @@
     <ng-template #modoGrid>
       <ion-grid>
         <ion-row>
-          <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" *ngFor="let pelicula of listaPeliculas; index as id">
-            <ion-card (click)="verPaginaDetalle(pelicula.id)">
+          <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let pelicula of listaPeliculas; index as id">
+            <ion-card (click)="verPaginaDetalle(pelicula.id)" style="text-align: center;">
+              <ion-img [src]="pelicula.poster" style="height: 200px; object-fit: cover;"></ion-img>
               <ion-card-header>
-                <ion-card-title>{{ pelicula.title }}</ion-card-title>
+                <ion-card-title style="font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  {{ pelicula.title }}
+                </ion-card-title>
               </ion-card-header>
-              <ion-img src={{pelicula.poster}}></ion-img>   
               <ion-card-content>
-          <p>
-            <strong style="color: #666769;">Director:</strong> {{ pelicula.director }}
-          </p>
-          <p>
-            <strong style="color: #666769;">Año:</strong> {{pelicula.year }}
-          </p>
+                <p>
+                  <strong style="color: #666769;">Director:</strong> {{ pelicula.director }}
+                </p>
+                <p>
+                  <strong style="color: #666769;">Año:</strong> {{ pelicula.year }}
+                </p>
               </ion-card-content>
             </ion-card>
           </ion-col>
